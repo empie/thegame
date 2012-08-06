@@ -13,8 +13,11 @@
 # Eclipse config #
 .classpath
 .project
+.settings/
+.metadata/
 
 # non source directories #
 /lib/
 /classes/
 /target/
+
