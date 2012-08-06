@@ -1,6 +1,20 @@
+# Ignore all dotfiles...
+.*
+# except for .gitignore
+!.gitignore
+
 *.class
 
 # Package Files #
 *.jar
 *.war
 *.ear
+
+# Eclipse config #
+.classpath
+.project
+
+# non source directories #
+/lib/
+/classes/
+/target/
