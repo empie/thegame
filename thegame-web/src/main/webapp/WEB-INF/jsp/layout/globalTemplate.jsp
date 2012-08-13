@@ -24,14 +24,17 @@
 	<script type="text/javascript" src="<c:url value="/static/js/${script}" />"></script>
 </c:forEach>
 </head>
-<body id="index" class="home">
-	
-	<header id="banner" class="body">
-		<tiles:insertAttribute name="header" />
-	</header>
-
-	<div class="siteBody">
-		<tiles:insertAttribute name="content" />
+<body>
+	<div id="container">
+		<header id="banner" class="body">
+			<tiles:insertAttribute name="header" />
+		</header>
+		<section>
+			<tiles:insertAttribute name="content" />
+		</section>
+		<footer>
+			<tiles:insertAttribute name="footer" />
+		</footer>
 	</div>
 </body>
 </html>
