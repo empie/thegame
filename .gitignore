@@ -17,7 +17,8 @@
 .metadata/
 
 # non source directories #
-/lib/
-/classes/
-/target/
+lib
+classes
+target
+bin
 
