@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.empuly.thegame</groupId>
+	<artifactId>thegame-db</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>net.empuly.thegame</groupId>
+		<artifactId>thegame-parent</artifactId>
+		<version>0.0.1</version>
+		<relativePath>../thegame-parent/pom.xml</relativePath>
+	</parent>
+
+
+	<dependencies>
+		
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		
+		<!-- DB maintainer -->
+		<dependency>
+			<groupId>org.dbmaintain</groupId>
+			<artifactId>dbmaintain</artifactId>
+		</dependency>
+
+		<!-- hsqldb -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>
+
+
+	</dependencies>
+
+</project>

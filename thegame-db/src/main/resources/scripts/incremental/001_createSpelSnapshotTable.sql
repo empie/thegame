@@ -1,0 +1,1 @@
+create table spelSnapshot (spelId VARCHAR(36), tijdstipAangemaakt TIMESTAMP, status TINYINT);

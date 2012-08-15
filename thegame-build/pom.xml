@@ -9,6 +9,7 @@
 	
 	<modules>
         <module>../thegame-parent</module>
+		<module>../thegame-db</module>
         <module>../thegame-query</module>
         <module>../thegame-command</module>
         <module>../thegame-web</module>
