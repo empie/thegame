@@ -32,14 +32,6 @@ public class SpelSnapshot implements Serializable {
 	public boolean equals(final Object obj) {
 		return valueObjectTrait.areEqual(this, obj);
 	}
-	@Override
-	public int hashCode() {
-		return valueObjectTrait.computeHashCode(this);
-	}
-	@Override
-	public String toString() {
-		return valueObjectTrait.computeToString(this);
-	}
 
 	public SpelId getSpelId() {
 		return spelId;
@@ -51,6 +43,16 @@ public class SpelSnapshot implements Serializable {
 
 	public LocalDateTime getTijdstipAangemaakt() {
 		return tijdstipAangemaakt;
+	}
+
+	@Override
+	public int hashCode() {
+		return valueObjectTrait.computeHashCode(this);
+	}
+
+	@Override
+	public String toString() {
+		return valueObjectTrait.computeToString(this);
 	}
 
 }

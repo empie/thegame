@@ -12,11 +12,16 @@ public class SpelId {
 	private final UUID id;
 	private ValueObjectTrait valueObjectTrait;
 
-	public SpelId() {
+	SpelId() {
 		this.id = UUID.randomUUID();
 		this.valueObjectTrait = new ValueObjectTraitImpl();
 	}
 	
+	SpelId(String bestaandeSpelId) {
+		id = UUID.fromString(bestaandeSpelId);
+		this.valueObjectTrait = new ValueObjectTraitImpl();
+	}
+
 	public UUID getId() {
 		return id;
 	}

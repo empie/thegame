@@ -16,7 +16,14 @@
 
 
 	<dependencies>
-
+		
+		<!-- thegame -->
+		<dependency>
+			<groupId>net.empuly.thegame</groupId>
+			<artifactId>thegame-db</artifactId>
+		</dependency>
+		
+		
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

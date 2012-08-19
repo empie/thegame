@@ -22,6 +22,11 @@
 			<!-- The Game -->
 			<dependency>
 				<groupId>net.empuly.thegame</groupId>
+				<artifactId>thegame-db</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.empuly.thegame</groupId>
 				<artifactId>thegame-query</artifactId>
 				<version>${project.version}</version>
 			</dependency>

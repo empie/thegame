@@ -4,4 +4,5 @@
 
 	<import resource="classpath:/context-thegame-query.xml" />
 	<import resource="classpath:/context-thegame-command.xml" />
+	<import resource="classpath:/context-thegame-app.xml" />
 </beans>
