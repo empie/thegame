@@ -6,7 +6,7 @@
 	<!-- spring container shared by servlets and filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext.xml</param-value>
+		<param-value>classpath:context-thegame-app.xml</param-value>
 	</context-param>
 
 	<listener>
@@ -15,12 +15,12 @@
 
 	<!-- spring mvc servlet -->
 	<servlet>
-		<servlet-name>springmvc</servlet-name>
+		<servlet-name>context-thegame</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>springmvc</servlet-name>
+		<servlet-name>context-thegame</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>

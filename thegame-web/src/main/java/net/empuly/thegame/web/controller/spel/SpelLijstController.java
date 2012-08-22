@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/spel")
 public class SpelLijstController {
 
-	private static final String VIEW_NAME_TILE_DEFINITION = "/spel/spelLijstTileDefinition";
+	public static final String NAAM_OP_MODEL_SPELEN = "spelen";
+
+	public static final String VIEW_NAME_TILE_DEFINITION = "/spel/spelLijstTileDefinition";
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(SpelLijstController.class);
 
@@ -29,7 +31,7 @@ public class SpelLijstController {
 	public String spelLijst(final Model model) {
 		final List<SpelSnapshot> spelen = spelSnapshotRepository.alleSpelen();
 		LOGGER.debug("Aantal opgehaalde spelen op model gezet: " + spelen.size());
-		model.addAttribute("spelen", spelen);
+		model.addAttribute(NAAM_OP_MODEL_SPELEN, spelen);
 		LOGGER.debug("View name om te renderen: " + VIEW_NAME_TILE_DEFINITION);
 		return VIEW_NAME_TILE_DEFINITION;
 	}

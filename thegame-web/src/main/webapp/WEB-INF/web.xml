@@ -6,7 +6,7 @@
 	<!-- spring container shared by servlets and filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/context-thegame-web.xml</param-value>
+		<param-value>classpath:context-thegame-app.xml</param-value>
 	</context-param>
 
 	<listener>

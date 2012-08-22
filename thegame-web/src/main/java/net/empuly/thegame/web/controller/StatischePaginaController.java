@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class StatischePaginaController {
 
-	private static final String URL_TO_REDIRECT_TO = "/spel/lijst";
+	public static final String URL_TO_REDIRECT_TO = "/spel/lijst";
 	private final static Logger LOGGER = LoggerFactory.getLogger(StatischePaginaController.class);
 	
     @RequestMapping("/")
