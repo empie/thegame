@@ -15,6 +15,7 @@
 		<thegame.tiles.version>2.2.2</thegame.tiles.version>
 		<thegame.guava.version>13.0</thegame.guava.version>
 		<thegame.slf4j.version>1.6.6</thegame.slf4j.version>
+		<thegame.webdriver.version>2.24.1</thegame.webdriver.version>
 	</properties>
 
 	<dependencyManagement>
@@ -29,6 +30,13 @@
 				<groupId>net.empuly.thegame</groupId>
 				<artifactId>thegame-query</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.empuly.thegame</groupId>
+				<artifactId>thegame-query</artifactId>
+				<version>${project.version}</version>
+				<type>test-jar</type>
+				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>net.empuly.thegame</groupId>
@@ -215,6 +223,13 @@
 				</exclusions>
 			</dependency>
 
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-firefox-driver</artifactId>
+				<version>${thegame.webdriver.version}</version>
+				<scope>test</scope>
+			</dependency>
+
 			<!-- Jetty server -->
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
@@ -284,6 +299,65 @@
 						<target>1.7</target>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>test-jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.12.2</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.surefire</groupId>
+							<artifactId>surefire-junit47</artifactId>
+							<version>2.12</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<includes>
+							<include>**/*.class</include>
+						</includes>
+						<excludedGroups>
+							net.empuly.thegame.query.testutils.IntegrationTest
+						</excludedGroups>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>2.12.2</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.surefire</groupId>
+							<artifactId>surefire-junit47</artifactId>
+							<version>2.12</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<groups>net.empuly.thegame.query.testutils.IntegrationTest</groups>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>integration-test</goal>
+							</goals>
+							<configuration>
+								<includes>
+									<include>**/*.class</include>
+								</includes>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -294,6 +368,18 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

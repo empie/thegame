@@ -25,6 +25,12 @@
 			<groupId>net.empuly.thegame</groupId>
 			<artifactId>thegame-query</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>net.empuly.thegame</groupId>
+			<artifactId>thegame-query</artifactId>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- Spring -->
 		<dependency>
@@ -79,6 +85,13 @@
 			<artifactId>hamcrest-integration</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-firefox-driver</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 
 		<!-- jetty -->
 		<dependency>

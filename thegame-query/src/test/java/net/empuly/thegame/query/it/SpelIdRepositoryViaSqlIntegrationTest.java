@@ -7,19 +7,21 @@ import java.util.UUID;
 import net.empuly.thegame.db.testdata.TestDataInserter;
 import net.empuly.thegame.db.testdata.row.SpelSnapshotRow;
 import net.empuly.thegame.query.api.domain.spel.SpelIdRepository;
+import net.empuly.thegame.query.testutils.IntegrationTest;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
+@Category(IntegrationTest.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/context-thegame-query.xml", "/context-thegame-app-test.xml" })
-public class SpelIdRepositoryViaSqlIntegrationTest {
+public class SpelIdRepositoryViaSqlIntegrationTest  {
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
