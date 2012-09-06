@@ -18,7 +18,7 @@
 	</hgroup>
 	<c:choose>
 		<c:when test="${empty spelen}">
-		Geen spelen
+			<span id="geenSpelenSpan">Geen spelen gevonden </span>
 		</c:when>
 		<c:otherwise>
 

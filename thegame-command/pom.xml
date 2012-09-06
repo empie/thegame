@@ -6,7 +6,7 @@
 	<artifactId>thegame-command</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
-	
+
 	<parent>
 		<groupId>net.empuly.thegame</groupId>
 		<artifactId>thegame-parent</artifactId>
@@ -17,12 +17,22 @@
 
 	<dependencies>
 		
+		<!-- thegame dependencies -->
 		<dependency>
 			<groupId>net.empuly.thegame</groupId>
 			<artifactId>thegame-query</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
+		<!-- xstream -->
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+		</dependency>
+
 	</dependencies>
+
+
+
 
 </project>
