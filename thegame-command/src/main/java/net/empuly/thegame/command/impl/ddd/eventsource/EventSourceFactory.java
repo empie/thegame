@@ -1,14 +1,18 @@
-package net.empuly.thegame.command.impl.ddd;
+package net.empuly.thegame.command.impl.ddd.eventsource;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-public class EventSourceFactory <T extends EventSource<? extends Event>> {
-	public  T maakEventSource(final Class<T> verwachtEventSourceType, final JdbcEventSourceRij eventSourceRij,
-			final List<Event> events) {
+import net.empuly.thegame.command.impl.ddd.event.Event;
+import net.empuly.thegame.command.impl.ddd.eventstore.JdbcEventSourceRij;
+
+//TODO jozef: euhm, hoe schrijft ge hier nen test voor?
+public class EventSourceFactory<T extends EventSource<? extends Event>> {
+	public T maakEventSource(final Class<T> verwachtEventSourceType, final JdbcEventSourceRij eventSourceRij, final List<Event> events) {
 		try {
-			final IdMetVersie idVoorVolgendeVersie = new IdMetVersieFactory().specifiekeVersieVanSpecifiekeId(eventSourceRij.eventSourceId(), eventSourceRij.versie()).volgendeVersie();
+			final IdMetVersie idVoorVolgendeVersie = new IdMetVersieFactory().specifiekeVersieVanSpecifiekeId(
+					eventSourceRij.eventSourceId(), eventSourceRij.versie()).volgendeVersie();
 
 			final Constructor<T> constructor = verwachtEventSourceType.getConstructor(IdMetVersie.class);
 			final T eventSource = constructor.newInstance(idVoorVolgendeVersie);

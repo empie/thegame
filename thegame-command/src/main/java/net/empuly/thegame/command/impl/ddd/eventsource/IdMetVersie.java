@@ -1,4 +1,4 @@
-package net.empuly.thegame.command.impl.ddd;
+package net.empuly.thegame.command.impl.ddd.eventsource;
 
 import java.util.UUID;
 
@@ -14,15 +14,10 @@ public class IdMetVersie {
 	private final UUID id;
 	private final long versie;
 
-	IdMetVersie(final UUID id, final long version) {
-
+	IdMetVersie(final UUID id, final long versie) {
 		this.id = id;
-		this.versie = version;
-		this.valueObjectTrait = new ValueObjectTraitImpl();
-	}
-
-	public IdMetVersie andereVersie(final long andereVersie) {
-		return new IdMetVersieFactory().specifiekeVersieVanSpecifiekeId(id, andereVersie);
+		this.versie = versie;
+		valueObjectTrait = new ValueObjectTraitImpl();
 	}
 
 	@Override
@@ -30,17 +25,13 @@ public class IdMetVersie {
 		return valueObjectTrait.areEqual(this, obj);
 	}
 
-	public UUID id() {
-		return id;
-	}
-
-	public long versie() {
-		return versie;
-	}
-
 	@Override
 	public int hashCode() {
 		return valueObjectTrait.computeHashCode(this);
+	}
+
+	public UUID id() {
+		return id;
 	}
 
 	public boolean isInitieleVersie() {
@@ -52,8 +43,16 @@ public class IdMetVersie {
 		return valueObjectTrait.computeToString(this);
 	}
 
+	public long versie() {
+		return versie;
+	}
+
 	public IdMetVersie volgendeVersie() {
 		return andereVersie(versie + 1);
+	}
+
+	private IdMetVersie andereVersie(final long andereVersie) {
+		return new IdMetVersieFactory().specifiekeVersieVanSpecifiekeId(id, andereVersie);
 	}
 
 }

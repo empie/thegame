@@ -9,14 +9,14 @@ public class ForeignKey<Id extends Object, someRowType extends RowWithId<Id>> {
 	private ForeignKey() {
 	}
 
-	public static <I extends Object, S extends RowWithId<I>> ForeignKey<I, S> foreignKey(S value) {
-		ForeignKey<I, S> foreignKey = new ForeignKey<I, S>();
+	public static <Id extends Object, someRowType extends RowWithId<Id>> ForeignKey<Id, someRowType> foreignKey(someRowType value) {
+		ForeignKey<Id, someRowType> foreignKey = new ForeignKey<Id, someRowType>();
 		foreignKey.setRow(value);
 		return foreignKey;
 	}
 
-	public static <I extends Object, S extends RowWithId<I>> ForeignKey<I, S> foreignKey() {
-		return new ForeignKey<I, S>();
+	public static <Id extends Object, someRowType extends RowWithId<Id>> ForeignKey<Id, someRowType> foreignKey() {
+		return new ForeignKey<Id, someRowType>();
 	}
 
 	public void setRow(someRowType someRow) {
@@ -36,4 +36,3 @@ public class ForeignKey<Id extends Object, someRowType extends RowWithId<Id>> {
 	}
 
 }
-

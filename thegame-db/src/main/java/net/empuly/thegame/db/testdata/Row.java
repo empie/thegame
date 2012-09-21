@@ -34,6 +34,10 @@ public abstract class Row extends Insertable {
 				.execute(params);
 	}
 
+	protected <T> String rowValue(Class<T> clazz) {
+		return clazz.getCanonicalName();
+	}
+
 	protected String rowValue(final Boolean flag) {
 		return (flag != null) && flag ? "Y" : "N";
 	}
@@ -45,7 +49,7 @@ public abstract class Row extends Insertable {
 	protected Timestamp rowValue(final LocalDateTime dateTime) {
 		return dateTime == null ? null : new Timestamp(dateTime.toDateTime().getMillis());
 	}
-	
+
 	protected String rowValue(final UUID uuid) {
 		return uuid.toString();
 	}

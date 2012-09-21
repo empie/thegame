@@ -1,4 +1,4 @@
-package net.empuly.thegame.command.impl.ddd;
+package net.empuly.thegame.command.impl.ddd.repository;
 
 import java.util.UUID;
 

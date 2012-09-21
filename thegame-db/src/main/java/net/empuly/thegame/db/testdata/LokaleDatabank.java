@@ -24,14 +24,20 @@ public class LokaleDatabank {
 	private DataSource datasource;
 
 	private static final List<String> TABLES = Arrays.asList(
-			"SpelSnapshot"
+			"SpelSnapshot",
+			"Event",
+			"EventSource"
 			);
-	
-	public static void  valideerTable(String table) {
+
+	public static void valideerTable(String table) {
 		checkState(
 				getTables().contains(table),
 				table
 						+ " has to be added to LokaleDatabank in order to clean this table automatically");
+	}
+
+	private static List<String> getTables() {
+		return TABLES;
 	}
 
 	public void deleteAll() {
@@ -45,10 +51,6 @@ public class LokaleDatabank {
 	}
 
 	private void execute(final String query) {
-		jdbcTemplate.update(query, new HashMap<String, Object>());
-	}
-
-	private static List<String> getTables() {
-		return TABLES;
+		this.jdbcTemplate.update(query, new HashMap<String, Object>());
 	}
 }

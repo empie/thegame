@@ -1,11 +1,14 @@
-package net.empuly.thegame.command.impl.ddd;
+package net.empuly.thegame.command.impl.ddd.eventsource;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public abstract class AggregateRootTraitImpl implements AggregateRootTrait {
+import net.empuly.thegame.command.impl.ddd.event.Event;
+
+public abstract class AggregateRootTraitImpl implements AggregateRoot {
 
 	private final IdMetVersie id;
 	private final List<Event> nogTePersisterenEvents;
@@ -18,9 +21,9 @@ public abstract class AggregateRootTraitImpl implements AggregateRootTrait {
 
 	@Override
 	public List<Event> nogTePersisterenEvents() {
-		return new ArrayList<Event>(nogTePersisterenEvents);
+		return Collections.unmodifiableList(nogTePersisterenEvents);
 	}
-	
+
 	@Override
 	public IdMetVersie idMetVersie() {
 		return id;
@@ -28,21 +31,27 @@ public abstract class AggregateRootTraitImpl implements AggregateRootTrait {
 
 	@Override
 	public void reconstrueer(final Iterable<Event> events) {
+		checkNotNull(events);
 		for (final Event event : events) {
-			pasToe(event);
+			pasToeMetControles(event);
 		}
+	}
+
+	private void pasToeMetControles(Event event) {
+		checkNotNull(event);
+		pasToe(event);
 	}
 
 	@Override
 	public final void pasToeEnOnthoud(final Event event) {
-		pasToe(event);
+		pasToeMetControles(event);
 		nogTePersisterenEvents.add(event);
 	}
 
 	protected abstract void pasToe(Event event);
 
 	@Override
-	public void alleEventsGepersisteerd() {
+	public void markeerAlleNogTePersisterenEventsAlsGepersisteerd() {
 		nogTePersisterenEvents.clear();
 	}
 

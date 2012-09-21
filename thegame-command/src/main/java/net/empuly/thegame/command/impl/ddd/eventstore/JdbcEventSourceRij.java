@@ -1,16 +1,19 @@
-package net.empuly.thegame.command.impl.ddd;
+package net.empuly.thegame.command.impl.ddd.eventstore;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.UUID;
 
+import net.empuly.thegame.command.impl.ddd.eventsource.EventSource;
+
 public class JdbcEventSourceRij {
 
 	private static final int START_VOLGEND_SEQUENCE_NUMMER = 0;
 	private static final int INITIELE_VERSIE = 0;
 
-	public static JdbcEventSourceRij rijVoorEventSource(final UUID id, final Class<?> typeVanHetEvent, final long versie, final long volgendEventSequenceNummer) {
+	public static JdbcEventSourceRij rijVoorEventSource(final UUID id, final Class<?> typeVanHetEvent, final long versie,
+			final long volgendEventSequenceNummer) {
 		return new JdbcEventSourceRij(id, typeVanHetEvent, versie, volgendEventSequenceNummer);
 	}
 
@@ -28,7 +31,7 @@ public class JdbcEventSourceRij {
 	private JdbcEventSourceRij(final UUID id, final Class<?> typeVanDeEventSource, final long versie, final long volgendEventSequenceNummer) {
 		checkNotNull(id);
 		checkNotNull(typeVanDeEventSource);
-		checkArgument(typeVanDeEventSource.isAssignableFrom(EventSource.class));
+		checkArgument(EventSource.class.isAssignableFrom(typeVanDeEventSource));
 		checkArgument(versie >= 0);
 		checkArgument(volgendEventSequenceNummer >= 0);
 		this.id = id;
@@ -38,23 +41,23 @@ public class JdbcEventSourceRij {
 	}
 
 	public UUID eventSourceId() {
-		return id;
+		return this.id;
 	}
 
 	public Class<?> typeVanDeEventSource() {
-		return typeVanDeEventSource;
+		return this.typeVanDeEventSource;
 	}
 
 	public long versie() {
-		return versie;
+		return this.versie;
 	}
 
 	public long volgendEventSequenceNummer() {
-		return volgendEventSequenceNummer;
+		return this.volgendEventSequenceNummer;
 	}
-	
+
 	public long volgendEventSequenceNummerEnZetEentjeVerder() {
-		return volgendEventSequenceNummer++;
+		return this.volgendEventSequenceNummer++;
 	}
 
 }
