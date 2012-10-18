@@ -11,7 +11,7 @@ public class SomeEventSource implements net.empuly.thegame.command.impl.ddd.even
 
 	private final AggregateRootTraitImpl aggregateRootTrait;
 
-	public List<Event> events = new ArrayList<Event>();
+	private List<Event> events = new ArrayList<Event>();
 
 	public SomeEventSource(final IdMetVersie idMetVersie) {
 
@@ -25,7 +25,7 @@ public class SomeEventSource implements net.empuly.thegame.command.impl.ddd.even
 
 	}
 
-	public List<Event> getEvents() {
+	List<Event> lijstVanEventsVoorZeZijnToegepastOpEventSource() {
 		return this.events;
 	}
 

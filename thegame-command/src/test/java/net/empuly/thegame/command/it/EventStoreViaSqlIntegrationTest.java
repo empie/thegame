@@ -39,14 +39,28 @@ public class EventStoreViaSqlIntegrationTest {
 	private EventSourceMetEventsOpzetter opzetter;
 
 	@Test
-	public void gegeven_EenEventSourceInDeDatabank_wanneer_bewaarEventSource_dan_NieuweEventsOokInDeDatabankEnRaadpleegbaar() {
+	public void gegeven_EenEventSourceInDeDatabank_wanneer_bewaarNieuweEventSource_dan_NieuweEventSourceEnEventsOokInDeDatabankEnRaadpleegbaar() {
 		IdMetVersie idMetVersie = new IdMetVersieBuilderForTests().build();
 		SomeEventSource someEventSource = new SomeEventSource(idMetVersie);
 		someEventSource.pasToeEnOnthoud(new SomeEvent(idMetVersie));
 		eventStore.bewaarEventSource(someEventSource);
 		SomeEventSource geladenEventSource = this.eventStore.laadEventSourceViaId(SomeEventSource.class,idMetVersie.id());
 		assertThat(geladenEventSource).isNotNull();
-		assertThat(geladenEventSource.getEvents()).hasSize(1);
+		assertThat(geladenEventSource.lijstVanEventsVoorZeZijnToegepastOpEventSource()).hasSize(1);
+	}
+	
+	@Test
+	public void gegeven_EenEventSourceInDeDatabank_wanneer_bewaarNieuweVersieVanBestaandeEventSource_dan_EventSourceEnNieuweEventsOokInDeDatabankEnRaadpleegbaar() {
+		SomeEventSource geladenEventSource = this.eventStore.laadEventSourceViaId(SomeEventSource.class, this.opzetter.eventSourceRow()
+				.getId());
+		IdMetVersie idMetVersie = geladenEventSource.idMetVersie();
+		SomeEvent nieuweEvent = new SomeEvent(idMetVersie);
+		geladenEventSource.pasToeEnOnthoud(nieuweEvent);
+		
+		eventStore.bewaarEventSource(geladenEventSource);
+		SomeEventSource opnieuwGeladenEventSource = this.eventStore.laadEventSourceViaId(SomeEventSource.class,idMetVersie.id());
+		assertThat(opnieuwGeladenEventSource).isNotNull();
+		assertThat(opnieuwGeladenEventSource.lijstVanEventsVoorZeZijnToegepastOpEventSource()).hasSize(3);
 	}
 
 	@Test
@@ -58,9 +72,9 @@ public class EventStoreViaSqlIntegrationTest {
 		IdMetVersie verwachteIdMetVersieVoorHeleEventSource = origineleIdMetVersieVanDeEvents.volgendeVersie();
 		assertThat(geladenEventSource.idMetVersie()).isEqualTo(verwachteIdMetVersieVoorHeleEventSource);
 		assertThat(geladenEventSource.nogTePersisterenEvents()).isEmpty();
-		assertThat(geladenEventSource.getEvents()).hasSize(2);
-		Event eersteEvent = geladenEventSource.getEvents().get(0);
-		Event tweedeEvent = geladenEventSource.getEvents().get(1);
+		assertThat(geladenEventSource.lijstVanEventsVoorZeZijnToegepastOpEventSource()).hasSize(2);
+		Event eersteEvent = geladenEventSource.lijstVanEventsVoorZeZijnToegepastOpEventSource().get(0);
+		Event tweedeEvent = geladenEventSource.lijstVanEventsVoorZeZijnToegepastOpEventSource().get(1);
 		assertThat(eersteEvent).isInstanceOf(SomeEvent.class);
 		assertThat(tweedeEvent).isInstanceOf(SomeEvent.class);
 		assertThat(eersteEvent.eventVoorAggregateRootMetId()).isEqualTo(origineleIdMetVersieVanDeEvents);
