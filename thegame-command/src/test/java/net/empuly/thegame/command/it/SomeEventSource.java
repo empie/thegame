@@ -5,16 +5,15 @@ import java.util.List;
 
 import net.empuly.thegame.command.impl.ddd.event.Event;
 import net.empuly.thegame.command.impl.ddd.eventsource.AggregateRootTraitImpl;
-import net.empuly.thegame.command.impl.ddd.eventsource.EventSource;
 import net.empuly.thegame.command.impl.ddd.eventsource.IdMetVersie;
 
-public class SomeEventSource implements EventSource<SomeEvent> {
+public class SomeEventSource implements net.empuly.thegame.command.impl.ddd.eventsource.AggregateRoot {
 
 	private final AggregateRootTraitImpl aggregateRootTrait;
 
 	public List<Event> events = new ArrayList<Event>();
 
-	public SomeEventSource(IdMetVersie idMetVersie) {
+	public SomeEventSource(final IdMetVersie idMetVersie) {
 
 		this.aggregateRootTrait = new AggregateRootTraitImpl(idMetVersie) {
 
@@ -36,8 +35,18 @@ public class SomeEventSource implements EventSource<SomeEvent> {
 	}
 
 	@Override
-	public List<SomeEvent> nogTePersisterenEvents() {
-		return new ArrayList<SomeEvent>();
+	public void markeerAlleNogTePersisterenEventsAlsGepersisteerd() {
+		aggregateRootTrait.markeerAlleNogTePersisterenEventsAlsGepersisteerd();
+	}
+
+	@Override
+	public List<Event> nogTePersisterenEvents() {
+		return aggregateRootTrait.nogTePersisterenEvents();
+	}
+
+	@Override
+	public void pasToeEnOnthoud(final Event event) {
+		aggregateRootTrait.pasToeEnOnthoud(event);
 	}
 
 	@Override

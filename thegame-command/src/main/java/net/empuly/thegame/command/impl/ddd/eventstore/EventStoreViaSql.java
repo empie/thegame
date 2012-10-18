@@ -206,7 +206,7 @@ public class EventStoreViaSql implements EventStore {
 			final Event event) {
 
 		final HashMap<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put(KOLOM_EVENT_SOURCE_ID, eventSourceId);
+		parameters.put(KOLOM_EVENT_SOURCE_ID, eventSourceId.toString());
 		parameters.put(KOLOM_EVENT_VOLGNUMMER, eventVolgNummer);
 		parameters.put(KOLOM_EVENT_TIJDSTIP_TOEVOEGING, new Timestamp(tijdstipToevoegingEvents.toDateTime().getMillis()));
 		parameters.put(KOLOM_EVENT_DATA, this.eventSerializer.serialize(event));
@@ -224,7 +224,7 @@ public class EventStoreViaSql implements EventStore {
 
 	private void bewaarEventSourceRij(final JdbcEventSourceRij eventSourceRij, final long initieleWaardeVoorVolgendEventSequenceNummer) {
 		final HashMap<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put(KOLOM_EVENT_SOURCE_ID, eventSourceRij.eventSourceId());
+		parameters.put(KOLOM_EVENT_SOURCE_ID, eventSourceRij.eventSourceId().toString());
 		parameters.put(KOLOM_EVENT_SOURCE_TYPE, eventSourceRij.typeVanDeEventSource().getName());
 		parameters.put(KOLOM_EVENT_SOURCE_VERSIE, eventSourceRij.versie());
 		parameters.put(KOLOM_EVENT_SOURCE_VOLGEND_VRIJ_EVENT_VOLGNUMMER, initieleWaardeVoorVolgendEventSequenceNummer);

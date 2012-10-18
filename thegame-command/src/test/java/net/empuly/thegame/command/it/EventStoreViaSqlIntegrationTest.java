@@ -3,6 +3,7 @@ package net.empuly.thegame.command.it;
 import static org.fest.assertions.Assertions.assertThat;
 import net.empuly.thegame.command.impl.ddd.event.Event;
 import net.empuly.thegame.command.impl.ddd.eventsource.IdMetVersie;
+import net.empuly.thegame.command.impl.ddd.eventsource.IdMetVersieBuilderForTests;
 import net.empuly.thegame.command.impl.ddd.eventstore.EventStore;
 import net.empuly.thegame.command.impl.ddd.eventstore.XStreamEventSerializer;
 import net.empuly.thegame.db.testdata.TestDataInserter;
@@ -39,10 +40,13 @@ public class EventStoreViaSqlIntegrationTest {
 
 	@Test
 	public void gegeven_EenEventSourceInDeDatabank_wanneer_bewaarEventSource_dan_NieuweEventsOokInDeDatabankEnRaadpleegbaar() {
-		SomeEventSource geladenEventSource = this.eventStore.laadEventSourceViaId(SomeEventSource.class, this.opzetter.eventSourceRow()
-				.getId());
-		// geladenEventSource.
-		this.eventStore.bewaarEventSource(eventSourceOmTeBewaren);
+		IdMetVersie idMetVersie = new IdMetVersieBuilderForTests().build();
+		SomeEventSource someEventSource = new SomeEventSource(idMetVersie);
+		someEventSource.pasToeEnOnthoud(new SomeEvent(idMetVersie));
+		eventStore.bewaarEventSource(someEventSource);
+		SomeEventSource geladenEventSource = this.eventStore.laadEventSourceViaId(SomeEventSource.class,idMetVersie.id());
+		assertThat(geladenEventSource).isNotNull();
+		assertThat(geladenEventSource.getEvents()).hasSize(1);
 	}
 
 	@Test
